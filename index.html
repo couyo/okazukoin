@@ -1,0 +1,152 @@
+<html>
+<head>
+	<meta http-equiv="content-type" charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>okazuコイン</title>
+<script language="JavaScript" type="text/javascript">
+<!--//Copyright (C) WEST MiRa http://www.west-mira.jp
+
+	d=0;
+	hayasa=50;
+	coin=50;
+	bai=2;
+	kekka=coin;
+	kakekinn=0;
+	e=0;doko=0;i=0;
+	pic1=new Array();
+	pic2=new Array();
+	for(k=0; k<12; k++)
+		{
+		pic1[k]=new Image();	pic1[k].src=""+k+".gif";
+		pic2[k]=new Image();	pic2[k].src=""+k+"b.gif";
+		}
+
+	function img_load()
+		{
+		for(i=0; i<pic1.length; i++)
+			{
+			document.images["hidden"].src=pic1[i].src;
+			document.images["hidden"].src=pic2[i].src;
+			}
+		hajime();
+		}
+
+	function hajime()
+		{
+		for(k=0; k<12; k++)document.images["text"+k].src=pic1[k].src;
+		kekka=coin;
+		document.form1.kekka.value=coin;
+		i=0;
+		}
+
+	function starts(dotti)
+		{
+		kakekinn=document.form1.kakekinn.selectedIndex;
+		kaekekinn=(kakekinn==-1)?1:kakekinn++;
+
+		if(dotti==0)
+			{
+			if(coin<1)
+				{
+				alert("�M���̓R�C�����g���ʂ����Ă��܂��܂����c�B");
+				document.form1.kekka.value=0;
+				}
+			else 
+				{
+				kekka-=kakekinn;
+				document.form1.kekka.value=kekka;
+				doko=document.form1.basyo.selectedIndex;
+				if(doko==-1)basyo=0;
+				e=0; i=0; roulette();
+				}
+			}
+
+		else if(dotti==1)e=10000;
+		}
+
+	function roulette()
+		{
+		if(e<10000)
+			{
+			document.images["text"+i].src=pic2[i].src;
+			for(k=0; k<12; k++)if(k!=i)document.images["text"+k].src=pic1[k].src;
+			e++;
+			if(i<11)i++;
+			else i=0;
+			clearTimeout(d);
+			d=setTimeout('roulette()',hayasa);
+			}
+		else if(e==10000)
+			{
+			if(i!=0)a=i-1;
+			else a=11;
+			if(a==doko)
+				{
+				kekka=kakekinn*bai+kekka;
+				document.form1.kekka.value=kekka;
+				}
+			}
+		}
+
+//-->
+</script>
+
+</head>
+
+<body onLoad="img_load();">
+
+<table><tr><td>
+<table border="0" cellpadding="1"><tr>
+<td align="center">
+<img src="9.gif"width="70" border="0" name="text9"></td>
+<td align="center">
+<img src="10.gif"width="70" border="0" name="text10"><p><br></p>
+<img src="8.gif"width="70" border="0" name="text8"></td>
+<td align="center">
+<img src="11.gif"width="70" border="0" name="text11"><p><br></p><br><br>
+<img src="7.gif"width="70" border="0" name="text7"></td>
+<td align="center">
+<img src="0.gif"width="70" border="0" name="text0"><p><br></p><p><br></p><br>
+<img src="6.gif"width="70" border="0" name="text6"></td>
+<td align="center">
+<img src="1.gif"width="70" border="0" name="text1"><p><br></p><br><br>
+<img src="5.gif"width="70" border="0" name="text5"></td>
+<td align="center">
+<img src="2.gif"width="70" border="0" name="text2"><p><br></p>
+<img src="4.gif"width="70" border="0" name="text4"></td>
+<td align="center">
+<img src="3.gif"width="70" border="0" name="text3"></td>
+</tr></table>
+</td></tr>
+
+<form name="form1">
+<tr>
+<td>手持ちコインは後<input type="text" size="3" name="kekka">枚</td>
+</tr>
+
+<tr>
+<td><select name="basyo"><option>0<option>1<option>2<option>3<option>4<option>5
+<option>6<option>7<option>8<option>9<option>10<option>11
+</select>に
+<select name="kakekinn">
+<option>1<option>2<option>3<option>4<option>5<option>6<option>7<option>8<option>9<option>10
+<option>11<option>12<option>13<option>14<option>15<option>16<option>17<option>18
+<option>19<option>20
+<option>21<option>22<option>23<option>24<option>25<option>26<option>27<option>28
+<option>29<option>30
+</select>枚賭ける</td>
+</tr>
+<tr>
+<td>
+<input type="button" value="Start!" onClick="starts(0);">
+<input type="button" value="Stop!" onClick="starts(1);">
+<input type="button" value="Reset" onClick="hajime();">
+<img src="dummy.gif" name="hidden" width="1" height="1" border="0">
+</td>
+</tr>
+
+</table>
+</form>
+</td></tr></table>
+
+</body></html>
